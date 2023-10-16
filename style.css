@@ -1,0 +1,45 @@
+body {
+  background-color: hsl(32, 8%, 63%);
+}
+
+h1 {
+  text-align: center;
+}
+
+#boardContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#buttons {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+  gap: 20px;
+}
+
+#chessboard {
+  border: 1px solid black;
+  width: 400px;
+  height: 400px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  overflow: hidden;
+}
+
+.cell {
+  background-color: hsl(32, 54%, 93%);
+}
+
+.cell:nth-child(16n + 1),
+.cell:nth-child(16n + 3),
+.cell:nth-child(16n + 5),
+.cell:nth-child(16n + 7),
+.cell:nth-child(16n + 10),
+.cell:nth-child(16n + 12),
+.cell:nth-child(16n + 14),
+.cell:nth-child(16n + 16) {
+  background-color: green;
+}
