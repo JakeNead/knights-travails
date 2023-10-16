@@ -1,6 +1,8 @@
 //wrap everything in knightTravails module
 
 const chessboard = document.querySelector("#chessboard");
+const startCoordinates = document.querySelector("#startCoordinates");
+const targetCoordinates = document.querySelector("#targetCoordinates");
 
 (function renderGameboard(start) {
   for (let i = 7; i >= 0; i--) {
@@ -12,27 +14,71 @@ const chessboard = document.querySelector("#chessboard");
     }
   }
 })();
+
+// this might need to be tweaked
 function clearBoard() {
-  while (chessboard.hasChildNodes) {
-    chessboard.removeChild;
+  while (chessboard.firstChild) {
+    chessboard.removeChild(chessboard.firstChild);
   }
   renderGameboard();
 }
 
 (function eventListeners() {
   let startOrTarget;
+
+  const buttons = document.querySelectorAll("button");
+
+  function removeActiveAttribute() {
+    buttons.forEach((el) => {
+      el.classList.remove("activeButton");
+    });
+  }
+
   const start = document.querySelector("#start");
   start.addEventListener("click", () => {
     startOrTarget = "start";
+    removeActiveAttribute();
+    start.classList.add("activeButton");
   });
+
   const target = document.querySelector("#target");
   target.addEventListener("click", () => {
     startOrTarget = "target";
+    removeActiveAttribute();
+    target.classList.add("activeButton");
   });
+  //work on checking if a start/target has been selected then run the knightMoves function
+  const travail = document.querySelector("#travail");
+  travail.addEventListener("click", () => {
+    removeActiveAttribute();
+    const startCell = document.querySelector(".start").getAttribute("id");
+    const targetCell = document.querySelector(".target").getAttribute("id");
+    if (startCell && targetCell)
+      console.log(knightMoves(JSON.parse(startCell), JSON.parse(targetCell)));
+  });
+
+  const reset = document.querySelector("#reset");
+  reset.addEventListener("click", () => removeActiveAttribute());
 
   const cells = document.querySelectorAll(".cell");
   cells.forEach((el) => {
-    el.addEventListener("click", () => console.log(el.getAttribute("id")));
+    el.addEventListener("click", () => {
+      if (startOrTarget === "start") {
+        for (let element of cells) {
+          element.classList.remove("start");
+        }
+        el.classList.add("start");
+        startCoordinates.textContent = el.getAttribute("id");
+      } else if (startOrTarget === "target") {
+        for (let element of cells) {
+          element.classList.remove("target");
+        }
+        el.classList.add("target");
+        targetCoordinates.textContent = el.getAttribute("id");
+      }
+      console.log(startOrTarget);
+      console.log(el.getAttribute("id"));
+    });
   });
 
   // on btn click change button style
@@ -89,6 +135,6 @@ function Knight(position, path = []) {
   return { position, path };
 }
 
-console.log(knightMoves([0, 0], [0, 0]));
-console.log(knightMoves([0, 0], [3, 3]));
-console.log(knightMoves([0, 0], [7, 7]));
+// console.log(knightMoves([0, 0], [0, 0]));
+// console.log(knightMoves([0, 0], [3, 3]));
+// console.log(knightMoves([0, 0], [7, 7]));

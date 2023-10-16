@@ -18,6 +18,10 @@ h1 {
   gap: 20px;
 }
 
+.activeButton {
+  border: solid 2px black;
+}
+
 #chessboard {
   border: 1px solid black;
   width: 400px;
