@@ -1,12 +1,52 @@
-function Gameboard(start) {
-  const knight = Knight(start);
+//wrap everything in knightTravails module
+
+const chessboard = document.querySelector("#chessboard");
+
+(function renderGameboard(start) {
+  for (let i = 7; i >= 0; i--) {
+    for (let j = 0; j < 8; j++) {
+      const cell = document.createElement("div");
+      cell.setAttribute("class", "cell");
+      cell.setAttribute("id", `[${j},${i}]`);
+      chessboard.appendChild(cell);
+    }
+  }
+})();
+function clearBoard() {
+  while (chessboard.hasChildNodes) {
+    chessboard.removeChild;
+  }
+  renderGameboard();
 }
+
+(function eventListeners() {
+  let startOrTarget;
+  const start = document.querySelector("#start");
+  start.addEventListener("click", () => {
+    startOrTarget = "start";
+  });
+  const target = document.querySelector("#target");
+  target.addEventListener("click", () => {
+    startOrTarget = "target";
+  });
+
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach((el) => {
+    el.addEventListener("click", () => console.log(el.getAttribute("id")));
+  });
+
+  // on btn click change button style
+  //    remove other button styles
+  //    toggle cell click action
+  //    hover on cell shows knight or target with half opacity
+  // on travail click: kMoves()
+  //    display numbers on cells
+  // on cell click: if place knight/target on change style
+})();
 
 function knightMoves(start, end) {
   if (start.toString() === end.toString()) return start;
-
   let arr = [];
-
   const queue = [Knight(start)];
 
   while (queue.length > 0) {
@@ -16,7 +56,6 @@ function knightMoves(start, end) {
       break;
     }
     const p = queue[0].position;
-
     queue[0].path = queue[0].path.concat([p]);
 
     const moves = [
