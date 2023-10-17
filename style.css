@@ -51,6 +51,10 @@ button {
   outline: solid 3px rgb(49, 48, 46);
 }
 
+.coordinates {
+  text-align: center;
+}
+
 #chessboard {
   width: 400px;
   height: 400px;
