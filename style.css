@@ -1,6 +1,12 @@
+:root {
+  --bottom: -20px;
+  --left: -15px;
+}
+
 * {
   color: rgb(255, 255, 255);
   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
 }
 
 body {
@@ -48,11 +54,11 @@ button {
 #chessboard {
   width: 400px;
   height: 400px;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .cell {
@@ -98,4 +104,106 @@ button {
   background: url(target.svg);
   background-size: 100% 100%;
   background-repeat: no-repeat;
+}
+
+[id="[0,0]"]::after,
+[id="[1,0]"]::after,
+[id="[2,0]"]::after,
+[id="[3,0]"]::after,
+[id="[4,0]"]::after,
+[id="[5,0]"]::after,
+[id="[6,0]"]::after,
+[id="[7,0]"]::after,
+[id="[0,0]"]::before,
+[id="[0,1]"]::before,
+[id="[0,2]"]::before,
+[id="[0,3]"]::before,
+[id="[0,4]"]::before,
+[id="[0,5]"]::before,
+[id="[0,6]"]::before,
+[id="[0,7]"]::before {
+  font-size: 0.9rem;
+  color: hsl(0, 0%, 80%);
+}
+
+[id="[0,0]"]::after {
+  position: absolute;
+  content: "a";
+  bottom: var(--bottom);
+}
+[id="[1,0]"]::after {
+  position: absolute;
+  content: "b";
+  bottom: var(--bottom);
+}
+[id="[2,0]"]::after {
+  position: absolute;
+  content: "c";
+  bottom: var(--bottom);
+}
+[id="[3,0]"]::after {
+  position: absolute;
+  content: "d";
+  bottom: var(--bottom);
+}
+[id="[4,0]"]::after {
+  position: absolute;
+  content: "e";
+  bottom: var(--bottom);
+}
+[id="[5,0]"]::after {
+  position: absolute;
+  content: "f";
+  bottom: var(--bottom);
+}
+[id="[6,0]"]::after {
+  position: absolute;
+  content: "g";
+  bottom: var(--bottom);
+}
+[id="[7,0]"]::after {
+  position: absolute;
+  content: "h";
+  bottom: var(--bottom);
+}
+
+[id="[0,0]"]::before {
+  position: absolute;
+  content: "1";
+  left: var(--left);
+}
+[id="[0,1]"]::before {
+  position: absolute;
+  content: "2";
+  left: var(--left);
+}
+[id="[0,2]"]::before {
+  position: absolute;
+  content: "3";
+  left: var(--left);
+}
+[id="[0,3]"]::before {
+  position: absolute;
+  content: "4";
+  left: var(--left);
+}
+[id="[0,4]"]::before {
+  position: absolute;
+  content: "5";
+  left: var(--left);
+}
+[id="[0,5]"]::before {
+  position: absolute;
+  content: "6";
+  left: var(--left);
+}
+[id="[0,6]"]::before {
+  position: absolute;
+  content: "7";
+  left: var(--left);
+}
+[id="[0,7]"]::before {
+  position: absolute;
+  content: "8";
+  left: var(--left);
 }
