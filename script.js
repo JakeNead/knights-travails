@@ -4,6 +4,7 @@
   const targetCoordinates = document.querySelector("#targetCoordinates");
   const coordinatePath = document.querySelector("#coordinatePath");
   const letter = ["a", "b", "c", "d", "e", "f", "g", "h"];
+
   function renderGameboard(start) {
     for (let i = 7; i >= 0; i--) {
       for (let j = 0; j < 8; j++) {
@@ -112,7 +113,7 @@
       coordinatePath.innerHTML = "";
     }
     function convertCoordinates(arr) {
-      return `${letter[arr[1]]}${arr[3]}`;
+      return `${letter[arr[1]]}${JSON.parse(arr[3]) + 1}`;
     }
 
     const cells = document.querySelectorAll(".cell");
