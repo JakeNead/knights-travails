@@ -1,9 +1,31 @@
-body {
-  background-color: hsl(32, 8%, 63%);
+* {
+  color: rgb(255, 255, 255);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-h1 {
+body {
+  background-color: rgb(82, 78, 75);
+}
+
+h1,
+button {
   text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+#buttons {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  background-color: rgb(66, 64, 62);
+  width: 65px;
+  height: 25px;
+  border: none;
+  border-bottom: 4px solid rgb(49, 48, 46);
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 #boardContainer {
@@ -16,14 +38,14 @@ h1 {
   flex-direction: column;
   margin: 30px;
   gap: 20px;
+  border-radius: 8px;
 }
 
 .activeButton {
-  border: solid 2px black;
+  outline: solid 3px rgb(49, 48, 46);
 }
 
 #chessboard {
-  border: 1px solid black;
   width: 400px;
   height: 400px;
   border-radius: 8px;
@@ -34,7 +56,13 @@ h1 {
 }
 
 .cell {
-  background-color: hsl(32, 54%, 93%);
+  font-size: 2rem;
+  background-color: rgb(120, 152, 88);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(66, 64, 62);
 }
 
 .cell:nth-child(16n + 1),
@@ -45,5 +73,29 @@ h1 {
 .cell:nth-child(16n + 12),
 .cell:nth-child(16n + 14),
 .cell:nth-child(16n + 16) {
-  background-color: green;
+  background-color: hsl(32, 54%, 93%);
+}
+
+.cell.start > .overlay {
+  position: absolute;
+  top: 50%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  height: 85%;
+  background: url(knight.svg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.cell.target > .overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  height: 85%;
+  background: url(target.svg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
