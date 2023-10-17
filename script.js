@@ -3,6 +3,7 @@
 const chessboard = document.querySelector("#chessboard");
 const startCoordinates = document.querySelector("#startCoordinates");
 const targetCoordinates = document.querySelector("#targetCoordinates");
+const coordinatePath = document.querySelector("#coordinatePath");
 
 (function renderGameboard(start) {
   for (let i = 7; i >= 0; i--) {
@@ -11,6 +12,10 @@ const targetCoordinates = document.querySelector("#targetCoordinates");
       cell.setAttribute("class", "cell");
       cell.setAttribute("id", `[${j},${i}]`);
       chessboard.appendChild(cell);
+
+      const overlay = document.createElement("div");
+      overlay.setAttribute("class", "overlay");
+      cell.appendChild(overlay);
     }
   }
 })();
@@ -47,18 +52,48 @@ function clearBoard() {
     removeActiveAttribute();
     target.classList.add("activeButton");
   });
-  //work on checking if a start/target has been selected then run the knightMoves function
+
   const travail = document.querySelector("#travail");
   travail.addEventListener("click", () => {
     removeActiveAttribute();
-    const startCell = document.querySelector(".start").getAttribute("id");
-    const targetCell = document.querySelector(".target").getAttribute("id");
-    if (startCell && targetCell)
-      console.log(knightMoves(JSON.parse(startCell), JSON.parse(targetCell)));
+    const startCell = document.querySelector(".start");
+    const targetCell = document.querySelector(".target");
+    if (startCell && targetCell) {
+      coordinatePath.innerHTML = "";
+      startCellId = startCell.getAttribute("id");
+      targetCellId = targetCell.getAttribute("id");
+      displayCoordinates(
+        knightMoves(JSON.parse(startCellId), JSON.parse(targetCellId))
+      );
+    }
+    // display coordinate path in DOM
   });
 
+  function displayCoordinates(arr) {
+    arr.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      coordinatePath.appendChild(li);
+    });
+  }
+
   const reset = document.querySelector("#reset");
-  reset.addEventListener("click", () => removeActiveAttribute());
+  reset.addEventListener("click", () => {
+    removeActiveAttribute();
+    removeStartAndTarget();
+    startCoordinates.textContent = "[x,y]";
+    targetCoordinates.textContent = "[x,y]";
+    coordinatePath.innerHTML = "";
+    startOrTarget = "";
+  });
+
+  function removeStartAndTarget() {
+    const startCell = document.querySelector(".start");
+    if (startCell) startCell.classList.remove("start");
+
+    const targetCell = document.querySelector(".target");
+    if (targetCell) targetCell.classList.remove("target");
+  }
 
   const cells = document.querySelectorAll(".cell");
   cells.forEach((el) => {
@@ -69,6 +104,7 @@ function clearBoard() {
         }
         el.classList.add("start");
         startCoordinates.textContent = el.getAttribute("id");
+        el.querySelector;
       } else if (startOrTarget === "target") {
         for (let element of cells) {
           element.classList.remove("target");
@@ -76,8 +112,6 @@ function clearBoard() {
         el.classList.add("target");
         targetCoordinates.textContent = el.getAttribute("id");
       }
-      console.log(startOrTarget);
-      console.log(el.getAttribute("id"));
     });
   });
 
