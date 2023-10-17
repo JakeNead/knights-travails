@@ -3,7 +3,7 @@
   const startCoordinates = document.querySelector("#startCoordinates");
   const targetCoordinates = document.querySelector("#targetCoordinates");
   const coordinatePath = document.querySelector("#coordinatePath");
-
+  const letter = ["a", "b", "c", "d", "e", "f", "g", "h"];
   function renderGameboard(start) {
     for (let i = 7; i >= 0; i--) {
       for (let j = 0; j < 8; j++) {
@@ -79,7 +79,9 @@
     });
 
     function displayCoordinates(arr) {
-      arr.forEach((item) => {
+      const letter = ["a", "b", "c", "d", "e", "f", "g", "h"];
+      const moves = arr.map((item) => `${letter[item[0]]}${item[1] + 1}`);
+      moves.forEach((item) => {
         const li = document.createElement("li");
         li.textContent = item;
         coordinatePath.appendChild(li);
@@ -105,9 +107,12 @@
     });
 
     function clearCoordinateDisplay() {
-      startCoordinates.textContent = "[x,y]";
-      targetCoordinates.textContent = "[x,y]";
+      startCoordinates.textContent = "xy";
+      targetCoordinates.textContent = "xy";
       coordinatePath.innerHTML = "";
+    }
+    function convertCoordinates(arr) {
+      return `${letter[arr[1]]}${arr[3]}`;
     }
 
     const cells = document.querySelectorAll(".cell");
@@ -118,14 +123,18 @@
             element.classList.remove("start");
           }
           el.classList.add("start");
-          startCoordinates.textContent = el.getAttribute("id");
+          startCoordinates.textContent = convertCoordinates(
+            el.getAttribute("id")
+          );
           el.querySelector;
         } else if (startOrTarget === "target") {
           for (let element of cells) {
             element.classList.remove("target");
           }
           el.classList.add("target");
-          targetCoordinates.textContent = el.getAttribute("id");
+          targetCoordinates.textContent = convertCoordinates(
+            el.getAttribute("id")
+          );
         }
       });
     });
